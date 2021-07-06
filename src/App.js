@@ -88,10 +88,11 @@ export default function App() {
             parseFloat(result.main.temp_min - 273.15)
               .toFixed(2)
               .toString() +
-            "/" +
+            "°C / " +
             parseFloat(result.main.temp_max - 273.15)
               .toFixed(2)
-              .toString(),
+              .toString() +
+            "°C",
           humidity: result.main.humidity + "%",
           pressure: result.main.pressure + " hPa",
           wind: result.wind.speed + " m/s",

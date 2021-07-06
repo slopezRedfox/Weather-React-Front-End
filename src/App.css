@@ -83,6 +83,7 @@
   .right {
     position: absolute;
     height: 80vh;
+    max-height: 75vh;
     width: 100vw;
     grid-column: 1;
     grid-row: 1;
