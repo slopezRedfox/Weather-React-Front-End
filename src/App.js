@@ -11,6 +11,7 @@ import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, { useState, useRef, useCallback } from "react";
 
 // Component Imports
+import "./App.css";
 import { Selector } from "./components/Selector";
 import { Body } from "./components/Body";
 
@@ -64,14 +65,14 @@ export default function App() {
   );
 
   /**
-   * @function findWeather
+   * @function handlerGetWeather
    *
    * Get the weather information base on the place selected on the dropdown
    *
    * @param {float} lat longitude of the place selected
    * @param {float} lon latitude of the place selected
    */
-  const findWeather = (lat, lon) => {
+  const handlerGetWeather = (lat, lon) => {
     fetch(
       `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_TOKEN}`
     )
@@ -90,22 +91,38 @@ export default function App() {
       .catch((error) => console.log("error", error));
   };
 
+  const handlerClean = () => {
+    setWeather({
+      place: "",
+      tempeture: "",
+      minTemp: "",
+      maxTemp: "",
+      humidity: "",
+      pressure: "",
+      wind: "",
+    });
+  };
+
   return (
-    <div style={{ height: "100vh" }}>
-      <div
-        ref={geocoderContainerRef}
-        style={{ position: "absolute", top: 20, left: 20, zIndex: 1 }}
-      />
-
-      <Selector
-        mapRef={mapRef}
-        handleViewportChange={handleViewportChange}
-        viewport={viewport}
-        MAPBOX_TOKEN={MAPBOX_TOKEN}
-        geocoderContainerRef={geocoderContainerRef}
-      />
-
-      <Body weather={weather} viewport={viewport} findWeather={findWeather} />
+    <div className="split">
+      <div className="left">
+        <div
+          ref={geocoderContainerRef}
+          style={{ position: "absolute", top: 20, left: 20, zIndex: 1 }}
+        />
+        <Selector
+          mapRef={mapRef}
+          handleViewportChange={handleViewportChange}
+          viewport={viewport}
+          MAPBOX_TOKEN={MAPBOX_TOKEN}
+          geocoderContainerRef={geocoderContainerRef}
+          handlerClean={handlerClean}
+          handlerGetWeather={handlerGetWeather}
+        />
+      </div>
+      <div className="right">
+        <Body weather={weather} />
+      </div>
     </div>
   );
 }

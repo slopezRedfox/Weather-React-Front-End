@@ -7,6 +7,7 @@
  */
 
 // React Imports
+import Button from "@material-ui/core/Button";
 import MapGL from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 
@@ -26,6 +27,8 @@ export const Selector = ({
   viewport,
   MAPBOX_TOKEN,
   geocoderContainerRef,
+  handlerClean,
+  handlerGetWeather,
 }) => {
   return (
     <>
@@ -45,6 +48,23 @@ export const Selector = ({
           position="top-left"
         />
       </MapGL>
+      <div style={{ marginTop: 100 }} />
+      <Button
+        variant="contained"
+        onClick={() => {
+          handlerClean();
+        }}
+      >
+        Clear
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          handlerGetWeather(viewport.latitude, viewport.longitude);
+        }}
+      >
+        Find Me
+      </Button>
     </>
   );
 };

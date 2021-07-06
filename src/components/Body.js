@@ -10,20 +10,12 @@
  * @function Body
  *
  * @param {*} weather
- * @param {*} viewport
- * @param {*} findWeather
  * @returns
  */
-export const Body = ({ weather, viewport, findWeather }) => {
+export const Body = ({ weather }) => {
   return (
-    <div style={{ marginTop: 100, marginLeft: 40 }}>
-      <button
-        onClick={() => {
-          findWeather(viewport.latitude, viewport.longitude);
-        }}
-      >
-        Find Me
-      </button>
+    <div>
+
       <div>{weather.place}</div>
       <div>{weather.tempeture} °C </div>
       <div>
