@@ -10,10 +10,11 @@
   width: 80vw;
   height: 100vh;
   color: white;
-  margin-left: 10%;
+  padding-left: 10%;
   justify-content: flex-start;
   align-content: center;
   align-items: center;
+  transition: 1000ms;
 }
 .body-place {
   font-size: 5vmin;
@@ -79,7 +80,7 @@
     padding-top: 5vmax;
     max-height: 70vh;
     color: white;
-    margin-left: 10%;
+    padding-left: 10%;
     justify-content: flex-start;
     align-content: flex-end;
     align-items: flex-end;

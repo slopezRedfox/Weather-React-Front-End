@@ -17,7 +17,7 @@ import "./Body.css";
 
 export const Body = ({ weather, handlerClean }) => {
   return (
-    <div className="body-container">
+    <div className="body-container" style={{ background: weather.color }}>
       <div>
         <div className="body-place">{weather.place}</div>
         <div className="body-line"></div>

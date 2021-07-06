@@ -54,6 +54,7 @@ export default function App() {
     minTemp: "",
     humidity: "",
     wind: "",
+    color: "#1f222b",
   });
 
   //References needed for Geocoder and MapGL work properly
@@ -78,6 +79,17 @@ export default function App() {
     )
       .then((response) => response.json())
       .then((result) => {
+        var color = "#1f222b";
+        if (result.main.temp - 273.15 > 23) {
+          color = "#881b1b";
+        } else {
+          if (result.main.temp - 273.15 < 15) {
+            color = "#1b2b88";
+          } else {
+            color = "#1f222b";
+          }
+        }
+
         setWeather({
           place: result.name + ", " + result.sys.country,
           tempeture:
@@ -96,6 +108,7 @@ export default function App() {
           humidity: result.main.humidity + "%",
           pressure: result.main.pressure + " hPa",
           wind: result.wind.speed + " m/s",
+          color: color,
         });
       })
       .catch((error) => console.log("error", error));
@@ -110,6 +123,7 @@ export default function App() {
       humidity: "",
       pressure: "",
       wind: "",
+      color: "#1f222b",
     });
   };
 
