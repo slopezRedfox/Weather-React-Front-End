@@ -1,21 +1,61 @@
+/*
+ * Copyright (C) 2021
+ * All Rights Reserved.
+ *
+ * Author: Santiago López <santiago241996@gmail.com>
+ */
+
+// React Imports
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, { useState, useRef, useCallback } from "react";
-import MapGL from "react-map-gl";
-import Geocoder from "react-map-gl-geocoder";
 
-const MAPBOX_TOKEN =
-  "pk.eyJ1Ijoic2FudGkyNCIsImEiOiJja3FyYXVxeHoyZnBhMnhxdGx1YnZ4MnZlIn0.-p4ydcCyljRF25TWRDJYtg";
+// Component Imports
+import { Selector } from "./components/Selector";
+import { Body } from "./components/Body";
 
-const WEATHER_TOKEN = "00d4e900989bd20e786afa22383d03bd";
+// Constants Imports
+import { constants } from "./data/constants";
 
+/**
+ *
+ * @returns App View
+ */
 export default function App() {
+  //Get all the constants
+  const { MAPBOX_TOKEN } = constants;
+  const { WEATHER_TOKEN } = constants;
+  const { initLatitude } = constants;
+  const { initLongitude } = constants;
+
+  /**
+   * @param viewport
+   * It's use to get the latitude and longitude of the place selected on
+   * the dropdown selector.
+   */
   const [viewport, setViewport] = useState({
-    latitude: 37.7577,
-    longitude: -122.4376,
+    latitude: initLatitude,
+    longitude: initLongitude,
     zoom: 8,
   });
 
+  /**
+   * @param weather
+   * Contain all the data of the place including tempeture, humidity, wind
+   * speed, etc. All this data is display on the screen and dipends on the
+   * viewport data.
+   */
+  const [weather, setWeather] = useState({
+    place: "",
+    tempeture: "",
+    pressure: "",
+    maxTemp: "",
+    minTemp: "",
+    humidity: "",
+    wind: "",
+  });
+
+  //References needed for Geocoder and MapGL work properly
   const geocoderContainerRef = useRef();
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -23,24 +63,27 @@ export default function App() {
     []
   );
 
-  const [weather, setWeather] = useState({
-    place: "",
-    tempeture: "",
-    humidity: "",
-    wind: "",
-  });
-
+  /**
+   * @function findWeather
+   *
+   * Get the weather information base on the place selected on the dropdown
+   *
+   * @param {float} lat longitude of the place selected
+   * @param {float} lon latitude of the place selected
+   */
   const findWeather = (lat, lon) => {
     fetch(
       `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_TOKEN}`
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         setWeather({
           place: result.name + ", " + result.sys.country,
           tempeture: parseFloat(result.main.temp - 273.15).toFixed(2),
+          minTemp: parseFloat(result.main.temp_min - 273.15).toFixed(2),
+          maxTemp: parseFloat(result.main.temp_max - 273.15).toFixed(2),
           humidity: result.main.humidity,
+          pressure: result.main.pressure,
           wind: result.wind.speed,
         });
       })
@@ -53,35 +96,16 @@ export default function App() {
         ref={geocoderContainerRef}
         style={{ position: "absolute", top: 20, left: 20, zIndex: 1 }}
       />
-      <MapGL
-        ref={mapRef}
-        {...viewport}
-        width="1%"
-        height="0%"
-        onViewportChange={handleViewportChange}
-        mapboxApiAccessToken={MAPBOX_TOKEN}
-      >
-        <Geocoder
-          mapRef={mapRef}
-          containerRef={geocoderContainerRef}
-          onViewportChange={handleViewportChange}
-          mapboxApiAccessToken={MAPBOX_TOKEN}
-          position="top-left"
-        />
-      </MapGL>
-      <div style={{ marginTop: 100, marginLeft: 40 }}>
-        <button
-          onClick={() => {
-            findWeather(viewport.latitude, viewport.longitude);
-          }}
-        >
-          Find Me
-        </button>
-        <div>{weather.place}</div>
-        <div>tempeture: {weather.tempeture} °C </div>
-        <div>humidity: {weather.humidity} % </div>
-        <div>wind: {weather.wind} m/s</div>
-      </div>
+
+      <Selector
+        mapRef={mapRef}
+        handleViewportChange={handleViewportChange}
+        viewport={viewport}
+        MAPBOX_TOKEN={MAPBOX_TOKEN}
+        geocoderContainerRef={geocoderContainerRef}
+      />
+
+      <Body weather={weather} viewport={viewport} findWeather={findWeather} />
     </div>
   );
 }
