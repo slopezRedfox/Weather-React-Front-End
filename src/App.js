@@ -22,6 +22,7 @@ import { constants } from "./data/constants";
  *
  * @returns App View
  */
+
 export default function App() {
   //Get all the constants
   const { MAPBOX_TOKEN } = constants;
@@ -50,7 +51,6 @@ export default function App() {
     place: "",
     tempeture: "",
     pressure: "",
-    maxTemp: "",
     minTemp: "",
     humidity: "",
     wind: "",
@@ -80,12 +80,21 @@ export default function App() {
       .then((result) => {
         setWeather({
           place: result.name + ", " + result.sys.country,
-          tempeture: parseFloat(result.main.temp - 273.15).toFixed(2),
-          minTemp: parseFloat(result.main.temp_min - 273.15).toFixed(2),
-          maxTemp: parseFloat(result.main.temp_max - 273.15).toFixed(2),
-          humidity: result.main.humidity,
-          pressure: result.main.pressure,
-          wind: result.wind.speed,
+          tempeture:
+            parseFloat(result.main.temp - 273.15)
+              .toFixed(2)
+              .toString() + "°C",
+          minTemp:
+            parseFloat(result.main.temp_min - 273.15)
+              .toFixed(2)
+              .toString() +
+            "/" +
+            parseFloat(result.main.temp_max - 273.15)
+              .toFixed(2)
+              .toString(),
+          humidity: result.main.humidity + "%",
+          pressure: result.main.pressure + " hPa",
+          wind: result.wind.speed + " m/s",
         });
       })
       .catch((error) => console.log("error", error));

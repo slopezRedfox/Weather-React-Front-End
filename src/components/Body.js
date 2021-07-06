@@ -12,19 +12,21 @@
  * @param {*} weather
  * @returns
  */
+
+import "./Body.css";
+
 export const Body = ({ weather }) => {
   return (
-    <div>
-      <div>{weather.place}</div>
-      <div>{weather.tempeture} °C </div>
+    <div className="body-container">
       <div>
-        {weather.minTemp} / {weather.maxTemp}{" "}
+        <div className="body-place">{weather.place}</div>
+        <div className="body-line"></div>
+        <div className="body-temp">{weather.tempeture} </div>
+        <div className="body-temp-max-min">{weather.minTemp}</div>
+        <div className="body-humidity">Humidity: {weather.humidity}</div>
+        <div className="body-pressure">Pressure: {weather.pressure}</div>
+        <div className="body-wind">Wind Speed: {weather.wind}</div>
       </div>
-
-      <div>Humidity: {weather.humidity} % </div>
-      <div>Pressure: {weather.pressure} hPa </div>
-
-      <div>wind: {weather.wind} m/s</div>
     </div>
   );
 };
