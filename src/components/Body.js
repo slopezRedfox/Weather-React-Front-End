@@ -15,7 +15,6 @@
 export const Body = ({ weather }) => {
   return (
     <div>
-
       <div>{weather.place}</div>
       <div>{weather.tempeture} °C </div>
       <div>

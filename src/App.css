@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2021
+ * All Rights Reserved.
+ *
+ *
+ * Author: Santiago López <santiago241996@gmail.com>
+ */
+
 .split {
   height: 100vh;
   width: 100vw;
@@ -7,6 +15,7 @@
 }
 
 .left {
+  padding: 5%;
   width: 30vw;
   height: 100vh;
   grid-column: 1;

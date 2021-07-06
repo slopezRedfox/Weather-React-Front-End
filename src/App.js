@@ -106,10 +106,6 @@ export default function App() {
   return (
     <div className="split">
       <div className="left">
-        <div
-          ref={geocoderContainerRef}
-          style={{ position: "absolute", top: 20, left: 20, zIndex: 1 }}
-        />
         <Selector
           mapRef={mapRef}
           handleViewportChange={handleViewportChange}
