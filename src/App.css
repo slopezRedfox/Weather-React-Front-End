@@ -1,0 +1,105 @@
+/*
+ * Copyright (C) 2021
+ * All Rights Reserved.
+ *
+ *
+ * Author: Santiago López <santiago241996@gmail.com>
+ */
+
+.split {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+.left {
+  padding: 5%;
+  width: 30vw;
+  height: 100vh;
+  grid-column: 1;
+  grid-row: 1;
+  left: 0;
+  z-index: 0;
+  background: rgb(55, 59, 70);
+}
+
+.right {
+  position: absolute;
+  width: 70vw;
+  height: 100vh;
+  grid-column: 1;
+  grid-row: 2;
+  right: 0;
+  z-index: 1;
+  background: rgb(31, 34, 43);
+}
+
+.bottom {
+  position: absolute;
+  width: 0vw;
+  height: 0vh;
+  grid-column: 1;
+  grid-row: 3;
+  right: 0;
+  z-index: 1;
+  background: #881b1b;
+}
+
+.app-btn-clear {
+  display: flex;
+  background-color: rgb(111, 189, 147);
+  width: 0vw;
+  height: 0vh;
+  vertical-align: bottom;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  border-radius: 5px;
+  transition: 400ms;
+  font-size: 2.5vmin;
+  font-weight: 400;
+  color: white;
+  margin-left: 5vw;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.app-btn-clear:hover {
+  background-color: rgb(92, 153, 97);
+  transition: 400ms;
+}
+
+@media (max-width: 600px) {
+  .split {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .right {
+    position: absolute;
+    height: 80vh;
+    max-height: 75vh;
+    width: 100vw;
+    grid-column: 1;
+    grid-row: 1;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+  }
+
+  .left {
+    position: absolute;
+    height: 20vh;
+    width: 100vw;
+    grid-column: 2;
+    grid-row: 1;
+    right: 0;
+    top: 0;
+    z-index: 100;
+  }
+}
