@@ -35,3 +35,35 @@
   z-index: 1;
   background: rgb(31, 34, 43);
 }
+
+@media (max-width: 600px) {
+  .split {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .right {
+    position: absolute;
+    height: 80vh;
+    width: 100vw;
+    grid-column: 1;
+    grid-row: 1;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+
+  .left {
+    position: absolute;
+    height: 20vh;
+    width: 100vw;
+    grid-column: 2;
+    grid-row: 1;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+}

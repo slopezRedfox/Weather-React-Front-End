@@ -65,7 +65,7 @@ export const Selector = ({
       </div>
       <div className="selector-third-container">
         <div
-          className="selector-btn"
+          className="selector-btn-clear"
           variant="contained"
           onClick={() => {
             handlerClean();
