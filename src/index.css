@@ -1,0 +1,28 @@
+/*
+ * Copyright (C) 2021 Klooid Innovations
+ * All Rights Reserved.
+ *
+ * The contents of this software are proprietary and confidential to Klooid.
+ * No part of this program may be photocopied, reproduced or translated
+ * into another programming language without prior written consent of
+ * Klooid. The user is free to modify the source code after obtaining
+ * a software license from Klooid.  All source code changes must be provided
+ * back to Klooid without any encumbrance.
+ *
+ * Author: Santiago López <santiago241996@gmail.com>
+ */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
