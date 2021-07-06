@@ -15,7 +15,7 @@
 
 import "./Body.css";
 
-export const Body = ({ weather }) => {
+export const Body = ({ weather, handlerClean }) => {
   return (
     <div className="body-container">
       <div>
@@ -26,6 +26,15 @@ export const Body = ({ weather }) => {
         <div className="body-humidity">Humidity: {weather.humidity}</div>
         <div className="body-pressure">Pressure: {weather.pressure}</div>
         <div className="body-wind">Wind Speed: {weather.wind}</div>
+        <div
+          className="body-btn"
+          variant="contained"
+          onClick={() => {
+            handlerClean();
+          }}
+        >
+          Clear
+        </div>
       </div>
     </div>
   );

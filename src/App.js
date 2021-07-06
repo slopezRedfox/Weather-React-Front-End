@@ -126,7 +126,7 @@ export default function App() {
         />
       </div>
       <div className="right">
-        <Body weather={weather} />
+        <Body weather={weather} handlerClean={handlerClean} />
       </div>
     </div>
   );
